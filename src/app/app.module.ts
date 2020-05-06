@@ -15,14 +15,17 @@ import {ReactiveFormsModule } from '@angular/forms';
 import {MatInputModule} from '@angular/material/input';
 import {MatIconModule} from '@angular/material/icon';
 import {MatToolbarModule} from '@angular/material/toolbar';
-
+import { BookDetailsComponent } from './book-details/book-details.component';
+import {MatDialogModule} from '@angular/material/dialog';
 @NgModule({
   declarations: [
     AppComponent,
-    DockerTableComponent
+    DockerTableComponent,
+    BookDetailsComponent
   ],
   imports: [
     BrowserModule,
+    MatDialogModule,
     MatInputModule,
     ReactiveFormsModule,
     AppRoutingModule,

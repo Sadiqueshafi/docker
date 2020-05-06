@@ -1,25 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit ,Inject} from '@angular/core';
 import {DockerTableService} from './docker-table.service'
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { NgForm } from '@angular/forms';
-
-// export interface PeriodicElement {
-//   name: string;
-//   position: number;
-//   weight: number;
-//   symbol: string;
-// }
-// const ELEMENT_DATA: PeriodicElement[] = [
-//   {position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H'},
-//   {position: 2, name: 'Helium', weight: 4.0026, symbol: 'He'},
-//   {position: 3, name: 'Lithium', weight: 6.941, symbol: 'Li'},
-//   {position: 4, name: 'Beryllium', weight: 9.0122, symbol: 'Be'},
-//   {position: 5, name: 'Boron', weight: 10.811, symbol: 'B'},
-//   {position: 6, name: 'Carbon', weight: 12.0107, symbol: 'C'},
-//   {position: 7, name: 'Nitrogen', weight: 14.0067, symbol: 'N'},
-//   {position: 8, name: 'Oxygen', weight: 15.9994, symbol: 'O'},
-//   {position: 9, name: 'Fluorine', weight: 18.9984, symbol: 'F'},
-//   {position: 10, name: 'Neon', weight: 20.1797, symbol: 'Ne'},
-// ];
+import {BookDetailsComponent}from '../book-details/book-details.component'
+export interface dockerElement {
+  id:number,
+  name: string;
+  author: any;
+  publication: any;
+  category: any;
+  pages: any;
+  price: any;
+}
 
 @Component({
   selector: 'app-docker-table',
@@ -28,13 +20,13 @@ import { NgForm } from '@angular/forms';
 })
 export class DockerTableComponent implements OnInit {
   show=false;
-  isLooding = false;
+  isLoading= false;
   hellodocker:any[]=[]
   displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
   // dataSource = ELEMENT_DATA;
   EditRowId:any='';
   editField:any;
-  constructor(private http:DockerTableService) { }
+  constructor(private http:DockerTableService,public dialog: MatDialog) { }
 
   ngOnInit(): void {
       this.http.getdata('http://localhost:8080/bookservice/books',{status:"Active"}).subscribe((data:[])=>{
@@ -47,13 +39,18 @@ export class DockerTableComponent implements OnInit {
       // console.log(this.hellodocker)
     })
   }
-  onLogin(form:NgForm){
-    console.log(form.value);
+  openDialog(): void {
+    const dialogRef = this.dialog.open(BookDetailsComponent, {
+      width: '450px',
+      // data: {name: this.name, animal: this.animal}
+    });
 
-    this.http.postData('http://localhost:8080/bookservice/books/',form.value).subscribe(res=>{
-      console.log('data successfully add')
-    })
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      // this.animal = result;
+    });
   }
+
 
   updateList(id: number, property: string, event: any) {
     const editField = event.target.textContent;
@@ -74,6 +71,8 @@ export class DockerTableComponent implements OnInit {
     this.show=true;
   }
 }
+
+
 
   // deletedocker(dockerId:any){
   //   this.http.deletedocker('http://localhost:8080/bookservice/books',dockerId).subscribe(result=>{

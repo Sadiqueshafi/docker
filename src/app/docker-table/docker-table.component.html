@@ -40,56 +40,6 @@
   <!-- </div> -->
 <!-- </div> -->
 
-<div mat-dialog-content><div class="container" *ngIf="show">
-  <div class="text">
-    <h2 style="text-align: center;">Book Details</h2>
-</div>
-  <div class="container-fluid">
-      <div class="row">
-          <mat-spinner *ngIf="isLooding"></mat-spinner>
-
-          <div class=" col-md-10 col-sm-12 col-md-offset-1">
-              <mat-card *ngIf='!isLooding' >
-
-                  <form  (submit)="onLogin(signupForm)" #signupForm="ngForm" *ngIf="!isLooding">
-                      <mat-form-field>
-                          <input matInput type="input" name="name" ngModel #nameInput="ngModel" placeholder="Name"required>
-                              <mat-error *ngIf="nameInput.invalid">Please Enter Your Name</mat-error>
-                      </mat-form-field>
-
-                      <mat-form-field>
-                        <input matInput type="text" name="author" ngModel #authorInput="ngModel" placeholder="AuthoInputr"required>
-                            <mat-error *ngIf="authorInput.invalid">Please Enter Auther Name</mat-error>
-                    </mat-form-field>
-
-                    <mat-form-field>
-                      <input matInput type="text" name="publication" ngModel #publicationInput="ngModel" placeholder="publicationInput"required>
-                          <mat-error *ngIf="publicationInput.invalid">Please Enter a Publication Name</mat-error>
-                  </mat-form-field>
-                  <mat-form-field>
-                    <input matInput type="text" name="category" ngModel #categoryInput="ngModel" placeholder="category"required>
-                        <mat-error *ngIf="categoryInput.invalid">Please Enter a Category Name</mat-error>
-                </mat-form-field>
-                <mat-form-field>
-                  <input matInput type="text" name="pages" ngModel #pagesInput="ngModel" placeholder="pages"required>
-                      <mat-error *ngIf="pagesInput.invalid">Please Insert Page</mat-error>
-              </mat-form-field>
-              <mat-form-field>
-                <input matInput type="text" name="priceInput" ngModel #priceInput="ngModel" placeholder="  priceInput " required>
-                    <mat-error *ngIf="priceInput.invalid">Please Enter a content post</mat-error>
-              </mat-form-field>
-
-
-                      <button class="btn btn-danger btn-round ss"  fxLayout="center center" type="submit()" >Signup</button>
-                   </form>
-              </mat-card>
-          </div>
-          <!-- <p>output{{helloWorld}}</p> -->
-      </div>
-  </div>
-</div>
-
-</div>
 
 
 
@@ -99,8 +49,8 @@
     <div class="example-button-row">
       <div class="example-flex-container">
         <div class="example-button-container">
-          <button mat-fab color="primary" aria-label="Example icon button with a delete icon" (click)="showBookDetailForm()">
-            <mat-icon>line_weight</mat-icon>
+          <button mat-fab color="primary" aria-label="Example icon button with a delete icon" (click)="openDialog()">
+           <mat-icon>add_circle</mat-icon>
           </button>
         </div>
       </div>
@@ -137,7 +87,7 @@
           <td>
             <div class="btn btn-group" >
               <!-- <button class="btn btn-md btn-info" data-toggle="tooltip" title="View" (click)="abc()"><i class="fa fa-eye"></i></button> -->
-              <!-- <button mat-raised-button color="accent" (click)="abc()">Edit</button> -->
+              <button mat-raised-button color="accent" >Edit</button>
               <button mat-raised-button color="warn" (click)="deletedocker(docker.id)">Delete</button>
             </div>
           </td>
